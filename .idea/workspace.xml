@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d236257c-0a05-4b64-94cc-40932dfc49df" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/pucminas/compiladores/Simbolo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/pucminas/compiladores/TabelaSimbolos.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/pucminas/compiladores/RegistroLexico.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -26,7 +26,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TabelaSimbolos.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TabelaSimbolos.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/pucminas/compiladores/TabelaSimbolos.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-35">
@@ -35,6 +35,41 @@
                 <element signature="e#156#172#0" expanded="true" />
                 <element signature="e#3884#3885#0" expanded="true" />
                 <element signature="e#3932#3933#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RegistroLexico.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/pucminas/compiladores/RegistroLexico.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="14" column="29" lean-forward="true" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
+              <folding>
+                <element signature="e#786#787#0" expanded="true" />
+                <element signature="e#817#818#0" expanded="true" />
+                <element signature="e#862#863#0" expanded="true" />
+                <element signature="e#902#903#0" expanded="true" />
+                <element signature="e#935#936#0" expanded="true" />
+                <element signature="e#964#965#0" expanded="true" />
+                <element signature="e#1008#1009#0" expanded="true" />
+                <element signature="e#1044#1045#0" expanded="true" />
+                <element signature="e#1080#1081#0" expanded="true" />
+                <element signature="e#1111#1112#0" expanded="true" />
+                <element signature="e#1160#1161#0" expanded="true" />
+                <element signature="e#1200#1201#0" expanded="true" />
+                <element signature="e#1231#1232#0" expanded="true" />
+                <element signature="e#1258#1259#0" expanded="true" />
+                <element signature="e#1298#1299#0" expanded="true" />
+                <element signature="e#1330#1331#0" expanded="true" />
+                <element signature="e#1358#1359#0" expanded="true" />
+                <element signature="e#1385#1386#0" expanded="true" />
+                <element signature="e#1422#1423#0" expanded="true" />
+                <element signature="e#1454#1455#0" expanded="true" />
+                <element signature="e#1493#1494#0" expanded="true" />
+                <element signature="e#1528#1529#0" expanded="true" />
+                <element signature="e#1558#1559#0" expanded="true" />
+                <element signature="e#1587#1588#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -63,6 +98,7 @@
         <option value="$PROJECT_DIR$/src/com/pucminas/compiladores/Main.java" />
         <option value="$PROJECT_DIR$/src/com/pucminas/compiladores/Simbolo.java" />
         <option value="$PROJECT_DIR$/src/com/pucminas/compiladores/TabelaSimbolos.java" />
+        <option value="$PROJECT_DIR$/src/com/pucminas/compiladores/RegistroLexico.java" />
       </list>
     </option>
   </component>
@@ -206,12 +242,20 @@
       <option name="presentableId" value="Default" />
       <updated>1521828474215</updated>
       <workItem from="1521828479207" duration="200000" />
-      <workItem from="1522795401360" duration="2067000" />
+      <workItem from="1522795401360" duration="2182000" />
     </task>
+    <task id="LOCAL-00001" summary="Adiciona tabela de simbolos">
+      <created>1522800223907</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1522800223907</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2267000" />
+    <option name="totallyTimeSpent" value="2382000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1360" height="768" extended-state="6" />
@@ -253,7 +297,8 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="Adiciona tabela de simbolos" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adiciona tabela de simbolos" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -317,6 +362,39 @@
             <element signature="e#156#172#0" expanded="true" />
             <element signature="e#3884#3885#0" expanded="true" />
             <element signature="e#3932#3933#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/pucminas/compiladores/RegistroLexico.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="29" lean-forward="true" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
+          <folding>
+            <element signature="e#786#787#0" expanded="true" />
+            <element signature="e#817#818#0" expanded="true" />
+            <element signature="e#862#863#0" expanded="true" />
+            <element signature="e#902#903#0" expanded="true" />
+            <element signature="e#935#936#0" expanded="true" />
+            <element signature="e#964#965#0" expanded="true" />
+            <element signature="e#1008#1009#0" expanded="true" />
+            <element signature="e#1044#1045#0" expanded="true" />
+            <element signature="e#1080#1081#0" expanded="true" />
+            <element signature="e#1111#1112#0" expanded="true" />
+            <element signature="e#1160#1161#0" expanded="true" />
+            <element signature="e#1200#1201#0" expanded="true" />
+            <element signature="e#1231#1232#0" expanded="true" />
+            <element signature="e#1258#1259#0" expanded="true" />
+            <element signature="e#1298#1299#0" expanded="true" />
+            <element signature="e#1330#1331#0" expanded="true" />
+            <element signature="e#1358#1359#0" expanded="true" />
+            <element signature="e#1385#1386#0" expanded="true" />
+            <element signature="e#1422#1423#0" expanded="true" />
+            <element signature="e#1454#1455#0" expanded="true" />
+            <element signature="e#1493#1494#0" expanded="true" />
+            <element signature="e#1528#1529#0" expanded="true" />
+            <element signature="e#1558#1559#0" expanded="true" />
+            <element signature="e#1587#1588#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -61,13 +61,26 @@ public class Automato {
                         estadoAtual = estadoFinal;
 
                         linha += c;
+                    } else if (c == '0') { // Inicia hexadecimal
+                        estadoAtual = 12;
+                        linha += c;
+                    } else if (c == '_') { // Inicia identificador
+                        estadoAtual = 10;
+                        linha += c;
                     } else if (c == '<') {
                         estadoAtual = 8;
                         linha += c;
-                    }else if (c == '>') {
-                            estadoAtual = 9;
-                            linha += c;
-                    } else if (c == ' ') { // Leitura de espaco no inicio
+                    } else if (c == '>') {
+                        estadoAtual = 9;
+                        linha += c;
+                    }else if(letra(c)){
+                        estadoAtual = 11;
+                        linha += c;
+                    }else if(digito(c) && c != '0'){
+                        estadoAtual = 17;
+                        linha += c;
+                    }
+                    else if (c == ' ') { // Leitura de espaco no inicio
                         estadoAtual = 0;
                     } else if ((int) c == 9) { // TAB
                         estadoAtual = 0;
@@ -151,6 +164,7 @@ public class Automato {
                         estadoAtual = estadoFinal;
                         marcado = false;
                     }
+                    break;
                 case 6:
                     c = (char) leitor.read();
                     if (c == '*') {
@@ -195,26 +209,137 @@ public class Automato {
                     }
                     break;
                 case 8:
-                    c = (char)leitor.read();
-                    if(c == '>' || c == '=' || c == '-'){
+                    c = (char) leitor.read();
+                    if (c == '>' || c == '=' || c == '-') {
                         estadoAtual = estadoFinal;
                         linha += c;
-                    }
-
-                    else if (c != '>' || c != '=' || c != '-'){
+                    } else if (c != '>' || c != '=' || c != '-') {
                         estadoAtual = estadoFinal;
                         marcado = false;
                     }
                     break;
 
                 case 9:
-                    c = (char)leitor.read();
-                    if(c == '='){
+                    c = (char) leitor.read();
+                    if (c == '=') {
+                        estadoAtual = estadoFinal;
+                        linha += c;
+                    } else if (c != '=') {
+                        estadoAtual = estadoFinal;
+                        marcado = false;
+                    }
+                    break;
+
+                case 10:
+                    c = (char) leitor.read();
+                    if (c == '_') {
+                        estadoAtual = 10;
+                        linha += c;
+                    } else if (letra(c) || digito(c)) {
+                        estadoAtual = 11;
+                        linha += c;
+                    } else if ((int) c == 9) {
+                        estadoAtual = estadoFinal;
+                    } else if ((int) c == 10) {  // \n
+                        cont++;
+                        estadoAtual = estadoFinal;
+                    } else if ((int) c == 13) { // \r
+                        estadoAtual = estadoFinal;
+                    } else if ((int) c == 65535) // Fim de arquivo
+                    {
+                        System.out.println(cont + ":fim de arquivo não esperado.");
+                        System.exit(0);
+                    } else {
+                        estadoAtual = estadoFinal;
+                        marcado = false;
+                    }
+
+                    break;
+                case 11:
+                    c = (char) leitor.read();
+                    if (digito(c) || letra(c) || c == '_') {
+                        estadoAtual = 11;
+                        linha += c;
+                    } else if ((int) c == 9) {
+                        estadoAtual = estadoFinal;
+                    } else if ((int) c == 10) {  // \n
+                        cont++;
+                        estadoAtual = estadoFinal;
+                    } else if ((int) c == 13) { // \r
+                        estadoAtual = estadoFinal;
+                    } else if ((int) c == 65535) // Fim de arquivo
+                    {
+                        System.out.println(cont + ":fim de arquivo não esperado.");
+                        System.exit(0);
+                    } else {
+                        estadoAtual = estadoFinal;
+                        marcado = false;
+                    }
+                    break;
+                case 12:
+                    c = (char) leitor.read();
+                    if(digito(c)){
+                        estadoAtual = 13;
+                        linha += c;
+                    }else if( c == 'A' || c == 'B' || c == 'C' || c == 'D' || c == 'E' || c == 'F'){
+                        estadoAtual = 14;
+                        linha += c;
+                    }else{
+                        estadoAtual = estadoFinal;
+                        marcado = false;
+                    }
+                    break;
+                case 13:
+                    c = (char) leitor.read();
+                    if(digito(c)){
+                        estadoAtual = 16;
+                        linha += c;
+                    }else if( c == 'A' || c == 'B' || c == 'C' || c == 'D' || c == 'E' || c == 'F'){
+                        estadoAtual = 15;
+                        linha += c;
+                    }else{
+                        estadoAtual = estadoFinal;
+                        marcado = false;
+                    }
+                    break;
+                case 14:
+                    c = (char) leitor.read();
+                    if( c == 'A' || c == 'B' || c == 'C' || c == 'D' || c == 'E' || c == 'F' || digito(c)){
+                        linha += c;
+                        estadoAtual = 15;
+                    }
+                    break;
+                case 15:
+                    c = (char) leitor.read();
+                    if(c == 'h'){
                         estadoAtual = estadoFinal;
                         linha += c;
                     }
-
-                    else if (c != '='){
+                    else{
+                        estadoAtual = estadoFinal;
+                        marcado = false;
+                    }
+                    break;
+                case 16:
+                    c = (char) leitor.read();
+                    if(c == 'h'){
+                        estadoAtual = estadoFinal;
+                        linha += c;
+                    }else if(digito(c)){
+                        estadoAtual = 17;
+                        linha += c;
+                    }
+                    else{
+                        estadoAtual = estadoFinal;
+                        marcado = false;
+                    }
+                    break;
+                case 17:
+                    c = (char) leitor.read();
+                    if(digito(c)){
+                        estadoAtual = 17;
+                        linha += c;
+                    }else{
                         estadoAtual = estadoFinal;
                         marcado = false;
                     }

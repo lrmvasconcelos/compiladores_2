@@ -82,7 +82,7 @@ public class Utils{
     }
     
     public static void erroClasseIdentificadorIncompativel(int cont, String identificador){
-        System.out.println("cont + ": Classe do identificador incompatível [" + identificador + "].");
+        System.out.println(cont + ": Classe do identificador incompatível [" + identificador + "].");
         System.exit(0);
     }
 }

@@ -2,15 +2,15 @@ package com.pucminas.compiladores;
 
 import java.io.IOException;
 
-public class Main {
-
-    public static void main(String[] args) {
+public class Main{
+    public static void main(String[] args){
         System.out.println("Compiladores");
-        try {
+
+        try{
             Gramatica gramatica = new Gramatica();
-        } catch (IOException e) {
+        }
+        catch(IOException e){
             e.printStackTrace();
         }
-
     }
 }

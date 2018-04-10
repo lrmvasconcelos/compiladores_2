@@ -2,9 +2,8 @@ package com.pucminas.compiladores;
 
 import java.util.HashMap;
 
-public class TabelaSimbolos {
-
-    public static HashMap<String, Simbolo> token = new HashMap<String,Simbolo>();
+public class TabelaSimbolos{
+    public static HashMap<String, Simbolo> token = new HashMap<String, Simbolo>();
 
     private final byte FINAL = 0;
     private final byte INT = 1;
@@ -15,7 +14,7 @@ public class TabelaSimbolos {
     private final byte ELSE = 6;
     private final byte AND = 7;
     private final byte OR = 8;
-    private final byte NOT =9;
+    private final byte NOT = 9;
     private final byte ATRIBUICAO = 10;
     private final byte TO = 11;
     private final byte ABREPAREN = 12;
@@ -42,11 +41,10 @@ public class TabelaSimbolos {
     private final byte ABRECOLCHE = 33;
     private final byte FECHACOLCHE = 34;
     private final byte DO = 35;
-	private final byte CONSTANTE = 36;
+    private final byte CONSTANTE = 36;
     private int n = 37;
 
-    public TabelaSimbolos() {
-
+    public TabelaSimbolos(){
         token.put("final", new Simbolo(FINAL, "final"));
         token.put("int", new Simbolo(INT, "int"));
         token.put("char", new Simbolo(CHAR, "char"));
@@ -83,30 +81,28 @@ public class TabelaSimbolos {
         token.put("[", new Simbolo(ABRECOLCHE, "["));
         token.put("]", new Simbolo(FECHACOLCHE, "]"));
         token.put("do", new Simbolo(DO, "do"));
-		token.put("const", new Simbolo(CONSTANTE,"const"));
+        token.put("const", new Simbolo(CONSTANTE, "const"));
     }
 
-
     //Pesquisar
-    public byte pesquisa (String lexema){
+    public byte pesquisa(String lexema){
         Simbolo a = token.get(lexema);
         return a.getToken();
     }
+
     //Inserir
-    public Simbolo inserir(String lexema, String classe, String tipo)
-    {
-        Simbolo simbolo = new Simbolo((byte) n++,lexema, classe, tipo);
+    public Simbolo inserir(String lexema, String classe, String tipo){
+        Simbolo simbolo = new Simbolo((byte) n++, lexema, classe, tipo);
         token.put(lexema, simbolo);
         return token.get(lexema);
     }
+
     //Verifica se Lexama Existe
-    public boolean existe(String lexema)
-    {
+    public boolean existe(String lexema){
         return token.containsKey(lexema);
     }
 
-    public Simbolo getSimbolo(String lexema)
-    {
+    public Simbolo getSimbolo(String lexema){
         Simbolo a = token.get(lexema);
         return a;
     }

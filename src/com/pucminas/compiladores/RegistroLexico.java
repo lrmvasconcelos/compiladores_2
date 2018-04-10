@@ -1,6 +1,6 @@
 package com.pucminas.compiladores;
 
-public class RegistroLexico {
+public class RegistroLexico{
     int numToken;
     String lexema;
     Simbolo endereco; //IDs
@@ -27,55 +27,51 @@ public class RegistroLexico {
         this.cont = cont;
     }
 
-    public int getNumToken() {
+    public int getNumToken(){
         return numToken;
     }
 
-    public void setNumToken(int numToken) {
+    public void setNumToken(int numToken){
         this.numToken = numToken;
     }
 
-    public String getLexema() {
+    public String getLexema(){
         return lexema;
     }
 
-    public void setLexema(String lexema) {
+    public void setLexema(String lexema){
         this.lexema = lexema;
     }
 
-    public Simbolo getEndereco() {
+    public Simbolo getEndereco(){
         return endereco;
     }
 
-    public void setEndereco(Simbolo endereco) {
+    public void setEndereco(Simbolo endereco){
         this.endereco = endereco;
     }
 
-    public String getTipo() {
+    public String getTipo(){
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(String tipo){
         this.tipo = tipo;
     }
 
-    public int getCont() {
+    public int getCont(){
         return cont;
     }
 
-    public void setCont(int cont) {
+    public void setCont(int cont){
         this.cont = cont;
     }
 
-    public boolean getMarcado()
-    {
+    public boolean getMarcado(){
         return this.marcado;
     }
 
-    public char getC()
-    {
+    public char getC(){
         return this.c;
     }
-
 }
-

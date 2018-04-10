@@ -1,15 +1,13 @@
 package com.pucminas.compiladores;
 
-public class Simbolo {
-
+public class Simbolo{
     private String lexema;
     private byte token;
     private String classe;
     private String tipo;
     private String valor;
 
-    public Simbolo(){
-    }
+    public Simbolo(){ }
 
     public Simbolo(byte token, String lexema){
         this.lexema = lexema;
@@ -41,15 +39,15 @@ public class Simbolo {
         return lexema;
     }
 
-    public byte getToken() {
+    public byte getToken(){
         return token;
     }
 
-    public void setLexema(String lexema) {
+    public void setLexema(String lexema){
         this.lexema = lexema;
     }
 
-    public void setToken(byte token) {
+    public void setToken(byte token){
         this.token = token;
     }
 

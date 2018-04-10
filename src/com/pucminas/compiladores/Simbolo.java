@@ -6,7 +6,6 @@ public class Simbolo {
     private byte token;
     private String classe;
     private String tipo;
-    private int endereco;
     private String valor;
 
     public Simbolo(){
@@ -30,28 +29,11 @@ public class Simbolo {
         this.classe = classe;
     }
 
-    public Simbolo(byte token, String lexema, String classe, String tipo, int endereco){
-        this.lexema = lexema;
-        this.token = token;
-        this.classe = classe;
-        this.tipo = tipo;
-        this.endereco = endereco;
-    }
-
     public Simbolo(byte token, String lexema, String classe, String tipo, String valor){
         this.lexema = lexema;
         this.token = token;
         this.classe = classe;
         this.tipo = tipo;
-        this.valor = valor;
-    }
-
-    public Simbolo(byte token, String lexema, String classe, String tipo, int endereco, String valor){
-        this.lexema = lexema;
-        this.token = token;
-        this.classe = classe;
-        this.tipo = tipo;
-        this.endereco = endereco;
         this.valor = valor;
     }
 
@@ -85,14 +67,6 @@ public class Simbolo {
 
     public void setTipo(String tipo){
         this.tipo = tipo;
-    }
-
-    public int getEndereco(){
-        return this.endereco;
-    }
-
-    public void setEndereco(int endereco){
-        this.endereco = endereco;
     }
 
     public String getValor(){

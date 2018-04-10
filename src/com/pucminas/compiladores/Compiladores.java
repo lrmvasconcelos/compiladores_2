@@ -1,8 +1,8 @@
-package com.pucminas.compiladores;
+// Frederico Oliveira Costa Santos, Lucas Rafael Madeira Vasconcelos, Rafael Libânio Solli
 
 import java.io.IOException;
 
-public class Main{
+public class Compiladores{
     public static void main(String[] args){
         System.out.println("Compiladores");
 

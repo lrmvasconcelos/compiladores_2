@@ -1,4 +1,4 @@
-package com.pucminas.compiladores;
+// Frederico Oliveira Costa Santos, Lucas Rafael Madeira Vasconcelos, Rafael Libânio Solli
 
 public class Utils{
     public static boolean letra(char c){
@@ -47,37 +47,42 @@ public class Utils{
     }
     
     public static void erroCaractereInvalido(int cont, char c){
-        System.out.println("Erro [linha " + cont + "]: Caractere invalido [" + c + " ].");
+        System.out.println(cont + ": Caractere invalido [" + c + " ].");
         System.exit(0);
     }
     
     public static void erroLexemaNaoIdentificado(int cont, String lexema){
-        System.out.println("Erro [linha " + cont + "]: Lexema nao identificado [" + lexema + " ].");
+        System.out.println(cont + ": Lexema nao identificado [" + lexema + " ].");
         System.exit(0);
     }
     
     public static void erroFimDeArquivoInesperado(int cont){
-        System.out.println("Erro [linha " + cont + "]: Fim de arquivo inesperado.");
+        System.out.println(cont + ": Fim de arquivo inesperado.");
         System.exit(0);
     }
     
     public static void erroTokenInesperado(int cont, String token){
-        System.out.println("Erro [linha " + cont + "]: Token inesperado [" + token + "].");
+        System.out.println(cont + ": Token inesperado [" + token + "].");
         System.exit(0);
     }
     
     public static void erroIdentificadorJaDeclarado(int cont, String identificador){
-        System.out.println("Erro [linha " + cont + "]: Identificador ja declarado [" + identificador + "].");
+        System.out.println(cont + ": Identificador ja declarado [" + identificador + "].");
+        System.exit(0);
+    }
+    
+    public static void erroIdentificadorNaoDeclarado(int cont, String identificador){
+        System.out.println(cont + ": Identificador nao declarado [" + identificador + "].");
         System.exit(0);
     }
     
     public static void erroTiposIncompativeis(int cont, String tipo1, String tipo2){
-        System.out.println("Erro [linha " + cont + "]: Tipos incompativeis [" + tipo1 + " e " + tipo2 + "].");
+        System.out.println(cont + ": Tipos incompativeis [" + tipo1 + " e " + tipo2 + "].");
         System.exit(0);
     }
     
     public static void erroClasseIdentificadorIncompativel(int cont, String identificador){
-        System.out.println("Erro [linha " + cont + "]: Classe do identificador incompatível [" + identificador + "].");
+        System.out.println("cont + ": Classe do identificador incompatível [" + identificador + "].");
         System.exit(0);
     }
 }

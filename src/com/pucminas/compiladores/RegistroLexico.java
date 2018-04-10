@@ -1,4 +1,4 @@
-package com.pucminas.compiladores;
+// Frederico Oliveira Costa Santos, Lucas Rafael Madeira Vasconcelos, Rafael Libânio Solli
 
 public class RegistroLexico{
     int numToken;

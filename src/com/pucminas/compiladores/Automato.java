@@ -1,4 +1,4 @@
-package com.pucminas.compiladores;
+// Frederico Oliveira Costa Santos, Lucas Rafael Madeira Vasconcelos, Rafael Libânio Solli
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -118,7 +118,7 @@ public class Automato{
                         estadoAtual = estadoFinal;
                     }
                     else if((int)c == 65535){ // Fim de arquivo
-                        Utils.erroFimDeArquivoInesperado(cont);
+                        estadoAtual = estadoFinal;
                     }
                     else{ // String
                         linha += c;
@@ -133,7 +133,7 @@ public class Automato{
                         linha += c;
                     }
                     else if((int)c == 65535){ // Fim de arquivo
-                        Utils.erroFimDeArquivoInesperado(cont);
+                        estadoAtual = estadoFinal;
                     }
                     else{
                         Utils.erroLexemaNaoIdentificado(cont, linha);
@@ -148,7 +148,7 @@ public class Automato{
                         linha += c;
                     }
                     else if((int)c == 65535){ // Fim de arquivo
-                        Utils.erroFimDeArquivoInesperado(cont);
+                        estadoAtual = estadoFinal;
                     }
                     else{
                         Utils.erroLexemaNaoIdentificado(cont, linha);
@@ -185,7 +185,7 @@ public class Automato{
                         estadoAtual = 6;
                     }
                     else if((int)c == 65535){
-                        Utils.erroFimDeArquivoInesperado(cont);
+                        estadoAtual = estadoFinal;
                     }
                     else{ // Comentario
                         estadoAtual = 6;
@@ -213,7 +213,7 @@ public class Automato{
                         estadoAtual = 6;
                     }
                     else if((int)c == 65535){ // Fim de arquivo
-                        Utils.erroFimDeArquivoInesperado(cont);
+                        estadoAtual = estadoFinal;
                     }
                     else if(c != '*' && c != '/') // Comentario
                     {
@@ -269,7 +269,7 @@ public class Automato{
                         estadoAtual = estadoFinal;
                     }
                     else if((int)c == 65535){ // Fim de arquivo
-                        Utils.erroFimDeArquivoInesperado(cont);
+                        estadoAtual = estadoFinal;
                     }
                     else{ // Identificador
                         estadoAtual = estadoFinal;
@@ -295,7 +295,7 @@ public class Automato{
                         estadoAtual = estadoFinal;
                     }
                     else if((int)c == 65535){ // Fim de arquivo
-                        Utils.erroFimDeArquivoInesperado(cont);
+                        estadoAtual = estadoFinal;
                     }
                     else{ // Identificador
                         estadoAtual = estadoFinal;

@@ -118,10 +118,10 @@ public class Gramatica{
 							registro = anLex.automato(registro.getMarcado(), registro.getC());
 						}
 						else if(anLex.tabela.getSimbolo(registro.getLexema()).getClasse().equals("constante")){
-							erroClasseIdentificadorIncompativel(registro.getCont(), registro.getLexema());
+							Utils.erroClasseIdentificadorIncompativel(registro.getCont(), registro.getLexema());
 						}
 						else{
-							erroIdentificadorJaDeclarado(registro.getCont(), registro.getLexema());
+							Utils.erroIdentificadorJaDeclarado(registro.getCont(), registro.getLexema());
 						}
 					}
                 }
@@ -181,17 +181,108 @@ public class Gramatica{
 
         declaracao = false;
 
-        //TODO - produzC();
+        produzC();
     }
-
-    public Simbolo produzV() throws IOException{
-        if(registro.getNumToken() == CONSTANTE){
-            Simbolo cte = casaTokenConstante();
-            return cte;
-        }
-
-        return null;
-    }
+	
+    public void produzC() throws IOException{
+		Simbolo X1, X2, X3, X4;
+		
+		while((registro.getNumToken() == FOR) || (registro.getNumToken() == IF) || (registro.getNumToken() == READLN) ||
+			  (registro.getNumToken() == WRITE) || (registro.getNumToken() == WRITELN) || (registro.getNumToken() == PONTOVIRGULA) ||
+			  (registro.getNumToken() > 36)){
+			if(registro.getNumToken() == FOR){
+				casaToken(FOR);
+				X1 = casaTokenId();
+				caseToken(ATRIBUICAO);
+				X2 = produzE();
+				caseToken(TO);
+				X3 = produzE();
+				
+				if(registro.getNumToken() == STEP){
+					caseToken(STEP);
+					X4 = casaTokenConstante();
+				}
+				
+				caseToken(DO);
+				if(registro.getNumToken() != BEGIN){
+					produzC();
+				}
+				else{
+					caseToken(BEGIN);
+					while(registro.getNumToken() != END){
+						produzC();
+					}
+					caseToken(END);
+				}
+			}
+			else if(registro.getNumToken() == IF){
+				caseToken(IF);
+				X1 = produzE();
+				caseToken(THEN);
+				if(registro.getNumToken() != BEGIN){
+					produzC();
+				}
+				else{
+					caseToken(BEGIN);
+					while(registro.getNumToken() != END){
+						produzC();
+					}
+					caseToken(END);
+				}
+				
+				if(registro.getNumToken() == ELSE){
+					if(registro.getNumToken() != BEGIN){
+						produzC();
+					}
+					else{
+						caseToken(BEGIN);
+						while(registro.getNumToken() != END){
+							produzC();
+						}
+						caseToken(END);
+					}
+				}
+			}
+			else if(registro.getNumToken() == READLN){
+				casaToken(READLN);
+				casaToken(ABREPAREN);
+				X1 = casaTokenId();
+				casaToken(FECHPAREN);
+				casaToken(PONTOVIRGULA);
+			}
+			else if(registro.getNumToken() == WRITE){
+				casaToken(WRITE);
+				casaToken(ABREPAREN);
+				X1 = produzE();
+				while(registro.getNumToken() != FECHPAREN){
+					casaToken(VIRGULA);
+					X2 = produzE();
+				}
+				casaToken(FECHPAREN);
+				casaToken(PONTOVIRGULA);
+			}
+			else if(registro.getNumToken() == WRITELN){
+				casaToken(WRITELN);
+				casaToken(ABREPAREN);
+				X1 = produzE();
+				while(registro.getNumToken() != FECHPAREN){
+					casaToken(VIRGULA);
+					X2 = produzE();
+				}
+				casaToken(FECHPAREN);
+				casaToken(PONTOVIRGULA);
+			}
+			else if(registro.getNumToken() == PONTOVIRGULA){
+				casaToken(PONTOVIRGULA);
+			}
+			else if(registro.getNumToken() > 36){
+				X1 = casaTokenId();
+				casaToken(ATRIBUICAO);
+				X2 = produzE();
+				casaToken(PONTOVIRGULA);
+			}
+		}
+	}
 
     public void produzD() throws IOException{
         if((registro.getNumToken() == FINAL) || (registro.getNumToken() == INT) || (registro.getNumToken() == CHAR)){
@@ -273,6 +364,15 @@ public class Gramatica{
 
             casaToken(PONTOVIRGULA);
         }
+    }
+
+    public Simbolo produzV() throws IOException{
+        if(registro.getNumToken() == CONSTANTE){
+            Simbolo cte = casaTokenConstante();
+            return cte;
+        }
+
+        return null;
     }
 	
 	public Simbolo produzE() throws IOException{
@@ -549,12 +649,12 @@ public class Gramatica{
 	}
 	
 	public Simbolo produzX() throws IOException{
-		Simbolo X;
+		Simbolo X = null;
 		
 		if(registro.getNumToken() == ABREPAREN){
 			casaToken(ABREPAREN);
 			X = produzE();
-			casaToken(FPARENT);
+			casaToken(FECHAPAREN);
 		}
 		else if(registro.getNumToken() > 36){
 			X = casaTokenId();

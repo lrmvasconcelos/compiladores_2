@@ -100,6 +100,40 @@ public class Gramatica{
         return id;
     }
 
+    public Simbolo casaTokenId() throws IOException{
+        Simbolo id = null;
+
+        if((byte) registro.getNumToken() > 36){
+            if(registro.getNumToken() == (byte) 65535){
+                Utils.erroFimDeArquivoInesperado(registro.getCont());
+            }
+            else{
+                if(!anLex.tabela.existe(registro.getLexema()) || !anLex.tabela.getSimbolo(registro.getLexema()).getTipo().equals("")){
+                    Utils.erroIdentificadorJaDeclarado(registro.getCont(), registro.getLexema());
+                }
+                else{
+					if(anLex.tabela.existe(registro.getLexema())){
+						if(!anLex.tabela.getSimbolo(registro.getLexema()).getTipo().equals("")){
+							id = anLex.tabela.getSimbolo(registro.getLexema());
+							registro = anLex.automato(registro.getMarcado(), registro.getC());
+						}
+						else if(anLex.tabela.getSimbolo(registro.getLexema()).getClasse().equals("constante")){
+							erroClasseIdentificadorIncompativel(registro.getCont(), registro.getLexema());
+						}
+						else{
+							erroIdentificadorJaDeclarado(registro.getCont(), registro.getLexema());
+						}
+					}
+                }
+            }
+        }
+        else{
+            Utils.erroTokenInesperado(registro.getCont(), registro.getLexema());
+        }
+
+        return id;
+    }
+	
     public Simbolo casaTokenConstante() throws IOException{
         if(registro.getNumToken() == (byte) 65535){
             Utils.erroFimDeArquivoInesperado(registro.getCont());
@@ -147,7 +181,7 @@ public class Gramatica{
 
         declaracao = false;
 
-        //TODO - procC();
+        //TODO - produzC();
     }
 
     public Simbolo produzV() throws IOException{
@@ -240,4 +274,298 @@ public class Gramatica{
             casaToken(PONTOVIRGULA);
         }
     }
+	
+	public Simbolo produzE() throws IOException{
+		Simbolo F1, F2;
+		String tipo1, tipo2;
+		
+		F1 = produzF();
+		tipo1 = F1.getTipo();
+		
+		while((registro.getNumToken() == IGUAL) || (registro.getNumToken() == DIFERENTE) || (registro.getNumToken() == MENOR) ||
+		      (registro.getNumToken() == MAIOR) || (registro.getNumToken() == MENORIGUAL) || (registro.getNumToken() == MAIORIGUAL)){
+			if(registro.getNumToken() == IGUAL){
+				casaToken(IGUAL);
+				
+				F2 = produzF();
+				tipo2 = F2.getTipo();
+				
+				if(tipo1.equals(tipo2)){
+					F1 = new Simbolo((byte)32, F2.getLexema(), "constante", "booleano");
+				}
+				else{
+					Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+				}
+			}
+			else if(registro.getNumToken() == DIFERENTE){
+				casaToken(DIFERENTE);
+				
+				F2 = produzF();
+				tipo2 = F2.getTipo();
+				
+				if(tipo1.equals(tipo2)){
+					F1 = new Simbolo((byte)32, F2.getLexema(), "constante", "booleano");
+				}
+				else{
+					Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+				}
+			}
+			else if(registro.getNumToken() == MENOR){
+				casaToken(MENOR);
+				
+				F2 = produzF();
+				tipo2 = F2.getTipo();
+				
+				if(tipo1.equals(tipo2)){
+					F1 = new Simbolo((byte)32, F2.getLexema(), "constante", "booleano");
+				}
+				else{
+					Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+				}
+			}
+			else if(registro.getNumToken() == MAIOR){
+				casaToken(MAIOR);
+				
+				F2 = produzF();
+				tipo2 = F2.getTipo();
+				
+				if(tipo1.equals(tipo2)){
+					F1 = new Simbolo((byte)32, F2.getLexema(), "constante", "booleano");
+				}
+				else{
+					Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+				}
+			}
+			else if(registro.getNumToken() == MENORIGUAL){
+				casaToken(MENORIGUAL);
+				
+				F2 = produzF();
+				tipo2 = F2.getTipo();
+				
+				if(tipo1.equals(tipo2)){
+					F1 = new Simbolo((byte)32, F2.getLexema(), "constante", "booleano");
+				}
+				else{
+					Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+				}
+			}
+			else if(registro.getNumToken() == MAIORIGUAL){
+				casaToken(MAIORIGUAL);
+				
+				F2 = produzF();
+				tipo2 = F2.getTipo();
+				
+				if(tipo1.equals(tipo2)){
+					F1 = new Simbolo((byte)32, F2.getLexema(), "constante", "booleano");
+				}
+				else{
+					Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+				}
+			}
+		}
+		
+		return F1;
+	}
+	
+	public Simbolo produzF() throws IOException{
+		Simbolo T1, T2;
+		String tipo1, tipo2;
+		
+		T1 = produzT();
+		tipo1 = T1.getTipo();
+		
+		while((registro.getNumToken() == MAIS) || (registro.getNumToken() == MENOS) || (registro.getNumToken() == OR)){
+			if(registro.getNumToken() == MAIS){
+				casaToken(MAIS);
+				
+				T2 = produzT();
+				tipo2 = T2.getTipo();
+				
+				if(tipo1.equals(tipo2)){
+					if(tipo1.equals("inteiro")){
+						T1 = new Simbolo((byte)36, registro.getLexema(), "constante", "inteiro");
+					}
+					else if(tipo1.equals("caractere")){
+						T1 = new Simbolo((byte)36, registro.getLexema(), "constante", "caractere");
+					}
+				}
+				else{
+					Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+				}
+			}
+			else if(registro.getNumToken() == MENOS){
+				casaToken(MENOS);
+				
+				T2 = produzT();
+				tipo2 = T2.getTipo();
+				
+				if(tipo1.equals(tipo2)){
+					if(tipo1.equals("inteiro")){
+						T1 = new Simbolo((byte)36, registro.getLexema(), "constante", "inteiro");
+					}
+					else if(tipo1.equals("caractere")){
+						T1 = new Simbolo((byte)36, registro.getLexema(), "constante", "caractere");
+					}
+				}
+				else{
+					Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+				}
+			}
+			else if(registro.getNumToken() == OR){
+				casaToken(OR);
+				
+				T2 = produzT();
+				tipo2 = T2.getTipo();
+				
+				if(tipo1.equals(tipo2)){
+					if(tipo1.equals("inteiro")){
+						T1 = new Simbolo((byte)36, registro.getLexema(), "constante", "inteiro");
+					}
+					else if(tipo1.equals("caractere")){
+						T1 = new Simbolo((byte)36, registro.getLexema(), "constante", "caractere");
+					}
+				}
+				else{
+					Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+				}
+			}
+		}
+		
+		return T1;
+	}
+	
+	public Simbolo produzT() throws IOException{
+		Simbolo U1, U2;
+		String tipo1, tipo2;
+		
+		U1 = produzU();
+		tipo1 = U1.getTipo();
+		
+		while((registro.getNumToken() == VEZES) || (registro.getNumToken() == DIVIDIDO) ||
+		      (registro.getNumToken() == PORCENT) || (registro.getNumToken() == AND)){
+			if(registro.getNumToken() == VEZES){
+				casaToken(VEZES);
+				
+				U2 = produzU();
+				tipo2 = U2.getTipo();
+				
+				if(tipo1.equals(tipo2)){
+					if(tipo1.equals("inteiro")){
+						U1 = new Simbolo((byte)36, registro.getLexema(), "constante", "inteiro");
+					}
+					else if(tipo1.equals("caractere")){
+						U1 = new Simbolo((byte)36, registro.getLexema(), "constante", "caractere");
+					}
+				}
+				else{
+					Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+				}
+			}
+			else if(registro.getNumToken() == DIVIDIDO){
+				casaToken(DIVIDIDO);
+				
+				U2 = produzU();
+				tipo2 = U2.getTipo();
+				
+				if(tipo1.equals(tipo2)){
+					if(tipo1.equals("inteiro")){
+						U1 = new Simbolo((byte)36, registro.getLexema(), "constante", "inteiro");
+					}
+					else if(tipo1.equals("caractere")){
+						U1 = new Simbolo((byte)36, registro.getLexema(), "constante", "caractere");
+					}
+				}
+				else{
+					Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+				}
+			}
+			else if(registro.getNumToken() == PORCENT){
+				casaToken(PORCENT);
+				
+				U2 = produzU();
+				tipo2 = U2.getTipo();
+				
+				if(tipo1.equals(tipo2)){
+					if(tipo1.equals("inteiro")){
+						U1 = new Simbolo((byte)36, registro.getLexema(), "constante", "inteiro");
+					}
+					else if(tipo1.equals("caractere")){
+						U1 = new Simbolo((byte)36, registro.getLexema(), "constante", "caractere");
+					}
+				}
+				else{
+					Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+				}
+			}
+			else if(registro.getNumToken() == AND){
+				casaToken(AND);
+				
+				U2 = produzU();
+				tipo2 = U2.getTipo();
+				
+				if(tipo1.equals(tipo2)){
+					if(tipo1.equals("inteiro")){
+						U1 = new Simbolo((byte)36, registro.getLexema(), "constante", "inteiro");
+					}
+					else if(tipo1.equals("caractere")){
+						U1 = new Simbolo((byte)36, registro.getLexema(), "constante", "caractere");
+					}
+				}
+				else{
+					Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+				}
+			}
+		}
+		
+		return U1;
+	}
+	
+	public Simbolo produzU() throws IOException{
+		Simbolo X1, X2;
+		
+		X1 = produzX();
+		tipo1 = X1.getTipo();
+		
+		while(registro.getNumToken() == NOT){
+			casaToken(NOT);
+			
+			X2 = produzX();
+			tipo2 = X2.getTipo();
+			
+			if(tipo1.equals(tipo2)){
+				if(tipo1.equals("inteiro")){
+					X1 = new Simbolo((byte)36, registro.getLexema(), "constante", "inteiro");
+				}
+				else if(tipo1.equals("caractere")){
+					X1 = new Simbolo((byte)36, registro.getLexema(), "constante", "caractere");
+				}
+			}
+			else{
+				Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+			}
+		}
+		
+		return X1;
+	}
+	
+	public Simbolo produzX() throws IOException{
+		Simbolo X;
+		
+		if(registro.getNumToken() == ABREPAREN){
+			casaToken(ABREPAREN);
+			X = produzE();
+			casaToken(FPARENT);
+		}
+		else if(registro.getNumToken() > 36){
+			X = casaTokenId();
+		}
+		else if(registro.getNumToken() == CONSTANTE){
+			X = produzV();
+		}
+		else{
+			Utils.erroTokenInesperado(registro.getCont(), registro.getLexema());
+		}
+		
+		return X;
+	}
 }

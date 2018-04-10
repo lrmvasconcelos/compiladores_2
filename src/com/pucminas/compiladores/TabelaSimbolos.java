@@ -59,14 +59,14 @@ public class TabelaSimbolos{
         token.put("to", new Simbolo(TO, "to"));
         token.put("(", new Simbolo(ABREPAREN, "("));
         token.put(")", new Simbolo(FECHAPAREN, ")"));
-        token.put("<", new Simbolo(MENOS, "<"));
+        token.put("<", new Simbolo(MENOR, "<"));
         token.put(">", new Simbolo(MAIOR, ">"));
         token.put("<>", new Simbolo(DIFERENTE, "<>"));
         token.put(">=", new Simbolo(MAIORIGUAL, ">="));
         token.put("<=", new Simbolo(MENORIGUAL, "<="));
         token.put(",", new Simbolo(VIRGULA, ","));
         token.put("+", new Simbolo(MAIS, "+"));
-        token.put("-", new Simbolo(MENOR, "-"));
+        token.put("-", new Simbolo(MENOS, "-"));
         token.put("*", new Simbolo(VEZES, "*"));
         token.put("/", new Simbolo(DIVIDIDO, "/"));
         token.put(";", new Simbolo(PONTOVIRGULA, ";"));

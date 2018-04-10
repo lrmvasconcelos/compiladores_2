@@ -75,4 +75,9 @@ public class Utils{
         System.out.println("Erro [linha " + cont + "]: Tipos incompativeis [" + tipo1 + " e " + tipo2 + "].");
         System.exit(0);
     }
+    
+    public static void erroClasseIdentificadorIncompativel(int cont, String identificador){
+        System.out.println("Erro [linha " + cont + "]: Classe do identificador incompatível [" + identificador + "].");
+        System.exit(0);
+    }
 }

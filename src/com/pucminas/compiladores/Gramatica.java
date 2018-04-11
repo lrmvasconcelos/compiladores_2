@@ -190,6 +190,95 @@ public class Gramatica{
 
         produzC();
     }
+	
+    public void produzD() throws IOException{
+        if((registro.getNumToken() == FINAL) || (registro.getNumToken() == INT) || (registro.getNumToken() == CHAR)){
+            String tipo1 = "", tipo2 = "", nomeVariavel = "";
+            Simbolo expV;
+
+            if(registro.getNumToken() == FINAL){
+                casaToken(FINAL);
+                nomeVariavel = registro.getLexema();
+                casaTokenId("variavel", "final");
+                tipo1 = "final";
+            }
+
+            else{
+                if(registro.getNumToken() == INT){
+                    casaToken(INT);
+                    nomeVariavel = registro.getLexema();
+                    casaTokenId("variavel", "inteiro");
+                    tipo1 = "inteiro";
+                }
+
+                else{
+                    if(registro.getNumToken() == CHAR){
+                        casaToken(CHAR);
+                        nomeVariavel = registro.getLexema();
+                        casaTokenId("variavel", "caractere");
+                        tipo1 = "caractere";
+                    }
+                }
+            }
+
+            if(registro.getNumToken() == ATRIBUICAO){
+                casaToken(ATRIBUICAO);
+                expV = produzV();
+                tipo2 = expV.getTipo();
+
+                anLex.tabela.getSimbolo(nomeVariavel).setValor(expV.getValor());
+
+                if(!(tipo1.equals(tipo2))){
+                    Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+                }
+            }
+            else{
+                if(registro.getNumToken() == IGUAL){
+                    casaToken(IGUAL);
+                    expV = produzV();
+                    tipo2 = expV.getTipo();
+
+                    anLex.tabela.getSimbolo(nomeVariavel).setValor(expV.getValor());
+                    tipo1 = tipo2;
+                }
+                else{
+                    if(registro.getNumToken() == ABRECOLCHE){
+                        casaToken(ABRECOLCHE);
+                        expV = produzV();
+                        tipo2 = expV.getTipo();
+
+                        if(!(tipo2.equals("inteiro"))){
+                            Utils.erroTiposIncompativeis(registro.getCont(), "inteiro", tipo2);
+                        }
+
+                        anLex.tabela.getSimbolo(nomeVariavel).setValor(expV.getValor());
+                        casaToken(FECHACOLCHE);
+                    }
+					
+					while(registro.getNumToken() == VIRGULA){
+						casaToken(VIRGULA);
+						nomeVariavel = registro.getLexema();
+						casaTokenId("variavel", tipo1);
+
+						if(registro.getNumToken() == ABRECOLCHE){
+							casaToken(ABRECOLCHE);
+							expV = produzV();
+							tipo2 = expV.getTipo();
+
+							if(!(tipo2.equals("inteiro"))){
+								Utils.erroTiposIncompativeis(registro.getCont(), "inteiro", tipo2);
+							}
+
+							anLex.tabela.getSimbolo(nomeVariavel).setValor(expV.getValor());
+							casaToken(FECHACOLCHE);
+						}
+					}
+                }
+            }
+
+            casaToken(PONTOVIRGULA);
+        }
+    }
 
     public void produzC() throws IOException{
         Simbolo X1, X2, X3, X4;
@@ -300,96 +389,6 @@ public class Gramatica{
                     }
                 }
             }
-        }
-    }
-
-    public void produzD() throws IOException{
-        if((registro.getNumToken() == FINAL) || (registro.getNumToken() == INT) || (registro.getNumToken() == CHAR)){
-            String tipo1 = "", tipo2 = "", nomeVariavel = "";
-            Simbolo expV;
-
-            if(registro.getNumToken() == FINAL){
-                casaToken(FINAL);
-                nomeVariavel = registro.getLexema();
-                casaTokenId("variavel", "final");
-                tipo1 = "final";
-            }
-
-            else{
-                if(registro.getNumToken() == INT){
-                    casaToken(INT);
-                    nomeVariavel = registro.getLexema();
-                    casaTokenId("variavel", "inteiro");
-                    tipo1 = "inteiro";
-                }
-
-                else{
-                    if(registro.getNumToken() == CHAR){
-                        casaToken(CHAR);
-                        nomeVariavel = registro.getLexema();
-                        casaTokenId("variavel", "caractere");
-                        tipo1 = "caractere";
-                    }
-                }
-            }
-
-            if(registro.getNumToken() == ATRIBUICAO){
-                casaToken(ATRIBUICAO);
-                expV = produzV();
-                tipo2 = expV.getTipo();
-
-                anLex.tabela.getSimbolo(nomeVariavel).setValor(expV.getValor());
-
-                if(!(tipo1.equals(tipo2))){
-                    Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
-                }
-            }
-            else{
-                if(registro.getNumToken() == IGUAL){
-                    casaToken(IGUAL);
-                    expV = produzV();
-                    tipo2 = expV.getTipo();
-
-                    anLex.tabela.getSimbolo(nomeVariavel).setValor(expV.getValor());
-                    tipo1 = tipo2;
-                }
-                else{
-                    if(registro.getNumToken() == ABRECOLCHE){
-                        casaToken(ABRECOLCHE);
-                        expV = produzV();
-                        tipo2 = expV.getTipo();
-
-                        if(!(tipo2.equals("inteiro"))){
-                            Utils.erroTiposIncompativeis(registro.getCont(), "inteiro", tipo2);
-                        }
-
-                        anLex.tabela.getSimbolo(nomeVariavel).setValor(expV.getValor());
-                        casaToken(FECHACOLCHE);
-                    }
-                    else{
-                        while(registro.getNumToken() == VIRGULA){
-                            casaToken(VIRGULA);
-                            nomeVariavel = registro.getLexema();
-                            casaTokenId("variavel", tipo1);
-
-                            if(registro.getNumToken() == ABRECOLCHE){
-                                casaToken(ABRECOLCHE);
-                                expV = produzV();
-                                tipo2 = expV.getTipo();
-
-                                if(!(tipo2.equals("inteiro"))){
-                                    Utils.erroTiposIncompativeis(registro.getCont(), "inteiro", tipo2);
-                                }
-
-                                anLex.tabela.getSimbolo(nomeVariavel).setValor(expV.getValor());
-                                casaToken(FECHACOLCHE);
-                            }
-                        }
-                    }
-                }
-            }
-
-            casaToken(PONTOVIRGULA);
         }
     }
 

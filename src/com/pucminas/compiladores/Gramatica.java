@@ -113,13 +113,13 @@ public class Gramatica{
                     if(!anLex.tabela.getSimbolo(registro.getLexema()).getTipo().equals("")){
                         id = anLex.tabela.getSimbolo(registro.getLexema());
                         registro = anLex.automato(registro.getMarcado(), registro.getC());
-						
-						if(registro.getNumToken() == ABRECOLCHE){
-							casaToken(ABRECOLCHE);
-							produzE();
-							casaToken(FECHACOLCHE);
-						}
-					}
+                        
+                        if(registro.getNumToken() == ABRECOLCHE){
+                            casaToken(ABRECOLCHE);
+                            produzE();
+                            casaToken(FECHACOLCHE);
+                        }
+                    }
                     else{
                         if(anLex.tabela.getSimbolo(registro.getLexema()).getClasse().equals("constante")){
                             Utils.erroClasseIdentificadorIncompativel(registro.getCont(), registro.getLexema());
@@ -196,7 +196,7 @@ public class Gramatica{
 
         produzC();
     }
-	
+    
     public void produzD() throws IOException{
         if((registro.getNumToken() == FINAL) || (registro.getNumToken() == INT) || (registro.getNumToken() == CHAR)){
             String tipo1 = "", tipo2 = "", nomeVariavel = "";
@@ -260,25 +260,25 @@ public class Gramatica{
                         anLex.tabela.getSimbolo(nomeVariavel).setValor(expV.getValor());
                         casaToken(FECHACOLCHE);
                     }
-					
-					while(registro.getNumToken() == VIRGULA){
-						casaToken(VIRGULA);
-						nomeVariavel = registro.getLexema();
-						casaTokenId("variavel", tipo1);
+                    
+                    while(registro.getNumToken() == VIRGULA){
+                        casaToken(VIRGULA);
+                        nomeVariavel = registro.getLexema();
+                        casaTokenId("variavel", tipo1);
 
-						if(registro.getNumToken() == ABRECOLCHE){
-							casaToken(ABRECOLCHE);
-							expV = produzV();
-							tipo2 = expV.getTipo();
+                        if(registro.getNumToken() == ABRECOLCHE){
+                            casaToken(ABRECOLCHE);
+                            expV = produzV();
+                            tipo2 = expV.getTipo();
 
-							if(!(tipo2.equals("inteiro"))){
-								Utils.erroTiposIncompativeis(registro.getCont(), "inteiro", tipo2);
-							}
+                            if(!(tipo2.equals("inteiro"))){
+                                Utils.erroTiposIncompativeis(registro.getCont(), "inteiro", tipo2);
+                            }
 
-							anLex.tabela.getSimbolo(nomeVariavel).setValor(expV.getValor());
-							casaToken(FECHACOLCHE);
-						}
-					}
+                            anLex.tabela.getSimbolo(nomeVariavel).setValor(expV.getValor());
+                            casaToken(FECHACOLCHE);
+                        }
+                    }
                 }
             }
 
@@ -292,7 +292,7 @@ public class Gramatica{
         while((registro.getNumToken() == FOR) || (registro.getNumToken() == IF) || (registro.getNumToken() == READLN)
                 || (registro.getNumToken() == WRITE) || (registro.getNumToken() == WRITELN) || (registro.getNumToken() == PONTOVIRGULA)
                 || (registro.getNumToken() > 36)){
-			if(registro.getNumToken() == FOR){
+            if(registro.getNumToken() == FOR){
                 casaToken(FOR);
                 X1 = casaTokenId();
                 casaToken(ATRIBUICAO);
@@ -318,68 +318,68 @@ public class Gramatica{
                 }
             }
             else if(registro.getNumToken() == IF){
-				casaToken(IF);
-				X1 = produzE();
-				casaToken(THEN);
-				if(registro.getNumToken() != BEGIN){
-					produzC();
-				}
-				else{
-					casaToken(BEGIN);
-					produzC();
-					casaToken(END);
-				}
+                casaToken(IF);
+                X1 = produzE();
+                casaToken(THEN);
+                if(registro.getNumToken() != BEGIN){
+                    produzC();
+                }
+                else{
+                    casaToken(BEGIN);
+                    produzC();
+                    casaToken(END);
+                }
 
-				if(registro.getNumToken() == ELSE){
-					casaToken(ELSE);
-					if(registro.getNumToken() != BEGIN){
-						produzC();
-					}
-					else{
-						casaToken(BEGIN);
-						produzC();
-						casaToken(END);
-					}
-				}
-			}
-			else if(registro.getNumToken() == READLN){
-				casaToken(READLN);
-				casaToken(ABREPAREN);
-				X1 = casaTokenId();
-				casaToken(FECHAPAREN);
-				casaToken(PONTOVIRGULA);
-			}
-			else if(registro.getNumToken() == WRITE){
-				casaToken(WRITE);
-				casaToken(ABREPAREN);
-				X1 = produzE();
-				while(registro.getNumToken() != FECHAPAREN){
-					casaToken(VIRGULA);
-					X2 = produzE();
-				}
-				casaToken(FECHAPAREN);
-				casaToken(PONTOVIRGULA);
-			}
-			else if(registro.getNumToken() == WRITELN){
-				casaToken(WRITELN);
-				casaToken(ABREPAREN);
-				X1 = produzE();
-				while(registro.getNumToken() != FECHAPAREN){
-					casaToken(VIRGULA);
-					X2 = produzE();
-				}
-				casaToken(FECHAPAREN);
-				casaToken(PONTOVIRGULA);
-			}
-			else if(registro.getNumToken() == PONTOVIRGULA){
-				casaToken(PONTOVIRGULA);
-			}
-			else if(registro.getNumToken() > 36){
-				X1 = casaTokenId();
-				casaToken(ATRIBUICAO);
-				X2 = produzE();
-				casaToken(PONTOVIRGULA);
-			}
+                if(registro.getNumToken() == ELSE){
+                    casaToken(ELSE);
+                    if(registro.getNumToken() != BEGIN){
+                        produzC();
+                    }
+                    else{
+                        casaToken(BEGIN);
+                        produzC();
+                        casaToken(END);
+                    }
+                }
+            }
+            else if(registro.getNumToken() == READLN){
+                casaToken(READLN);
+                casaToken(ABREPAREN);
+                X1 = casaTokenId();
+                casaToken(FECHAPAREN);
+                casaToken(PONTOVIRGULA);
+            }
+            else if(registro.getNumToken() == WRITE){
+                casaToken(WRITE);
+                casaToken(ABREPAREN);
+                X1 = produzE();
+                while(registro.getNumToken() != FECHAPAREN){
+                    casaToken(VIRGULA);
+                    X2 = produzE();
+                }
+                casaToken(FECHAPAREN);
+                casaToken(PONTOVIRGULA);
+            }
+            else if(registro.getNumToken() == WRITELN){
+                casaToken(WRITELN);
+                casaToken(ABREPAREN);
+                X1 = produzE();
+                while(registro.getNumToken() != FECHAPAREN){
+                    casaToken(VIRGULA);
+                    X2 = produzE();
+                }
+                casaToken(FECHAPAREN);
+                casaToken(PONTOVIRGULA);
+            }
+            else if(registro.getNumToken() == PONTOVIRGULA){
+                casaToken(PONTOVIRGULA);
+            }
+            else if(registro.getNumToken() > 36){
+                X1 = casaTokenId();
+                casaToken(ATRIBUICAO);
+                X2 = produzE();
+                casaToken(PONTOVIRGULA);
+            }
         }
     }
 

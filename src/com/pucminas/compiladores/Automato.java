@@ -34,7 +34,7 @@ public class Automato{
                         c = (char)leitor.read();
 
                         if(!Utils.caractereValido(c)){
-                            Utils.erroCaractereInvalido(cont, c);
+                            Utils.erroCaractereInvalido(cont);
                         }
                     }
                     marcado = true;
@@ -389,13 +389,12 @@ public class Automato{
                     
                     break;
                 default:
-                    Utils.erroCaractereInvalido(cont, c);
+                    Utils.erroCaractereInvalido(cont);
                     break;
             }
         }
 
         if(fim){ // Fim de arquivo
-            System.out.println("Fim");
             registroLexico = new RegistroLexico((byte) 65535, linha, marcado, c, cont);
         }
         else if(!Utils.digito(linha.charAt(0)) && linha.charAt(0) != '"'){ // Não é numero nem string

@@ -221,7 +221,7 @@ public class Gramatica{
                 anLex.tabela.getSimbolo(nomeVariavel).setValor(expV.getValor());
 
                 if(!(tipo1.equals(tipo2))){
-                    Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+                    Utils.erroTiposIncompativeis(registro.getCont());
                 }
             }
             else{
@@ -240,7 +240,7 @@ public class Gramatica{
                         tipo2 = expV.getTipo();
 
                         if(!(tipo2.equals("inteiro"))){
-                            Utils.erroTiposIncompativeis(registro.getCont(), "inteiro", tipo2);
+                            Utils.erroTiposIncompativeis(registro.getCont());
                         }
 
                         anLex.tabela.getSimbolo(nomeVariavel).setValor(expV.getValor());
@@ -258,7 +258,7 @@ public class Gramatica{
                             tipo2 = expV.getTipo();
 
                             if(!(tipo2.equals("inteiro"))){
-                                Utils.erroTiposIncompativeis(registro.getCont(), "inteiro", tipo2);
+                                Utils.erroTiposIncompativeis(registro.getCont());
                             }
 
                             anLex.tabela.getSimbolo(nomeVariavel).setValor(expV.getValor());
@@ -397,7 +397,7 @@ public class Gramatica{
                     F1 = new Simbolo((byte) 32, F2.getLexema(), "constante", "booleano");
                 }
                 else{
-                    Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+                    Utils.erroTiposIncompativeis(registro.getCont());
                 }
             }
             else if(registro.getNumToken() == DIFERENTE){
@@ -410,7 +410,7 @@ public class Gramatica{
 					F1 = new Simbolo((byte) 32, F2.getLexema(), "constante", "booleano");
 				}
 				else{
-					Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+					Utils.erroTiposIncompativeis(registro.getCont());
 				}
 			}
 			else if(registro.getNumToken() == MENOR){
@@ -423,7 +423,7 @@ public class Gramatica{
 					F1 = new Simbolo((byte) 32, F2.getLexema(), "constante", "booleano");
 				}
 				else{
-					Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+					Utils.erroTiposIncompativeis(registro.getCont());
 				}
 			}
 			else if(registro.getNumToken() == MAIOR){
@@ -436,7 +436,7 @@ public class Gramatica{
 					F1 = new Simbolo((byte) 32, F2.getLexema(), "constante", "booleano");
 				}
 				else{
-					Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+					Utils.erroTiposIncompativeis(registro.getCont());
 				}
 			}
 			else if(registro.getNumToken() == MENORIGUAL){
@@ -449,7 +449,7 @@ public class Gramatica{
 					F1 = new Simbolo((byte) 32, F2.getLexema(), "constante", "booleano");
 				}
 				else{
-					Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+					Utils.erroTiposIncompativeis(registro.getCont());
 				}
 			}
 			else if(registro.getNumToken() == MAIORIGUAL){
@@ -462,7 +462,7 @@ public class Gramatica{
 					F1 = new Simbolo((byte) 32, F2.getLexema(), "constante", "booleano");
 				}
 				else{
-					Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+					Utils.erroTiposIncompativeis(registro.getCont());
 				}
 			}
         }
@@ -495,7 +495,7 @@ public class Gramatica{
                     }
                 }
                 else{
-                    Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+                    Utils.erroTiposIncompativeis(registro.getCont());
                 }
             }
             else if(registro.getNumToken() == MENOS){
@@ -515,7 +515,7 @@ public class Gramatica{
 					}
 				}
 				else{
-					Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+					Utils.erroTiposIncompativeis(registro.getCont());
 				}
 			}
 			else if(registro.getNumToken() == OR){
@@ -535,7 +535,7 @@ public class Gramatica{
 					}
 				}
 				else{
-					Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+					Utils.erroTiposIncompativeis(registro.getCont());
 				}
 			}
         }
@@ -569,7 +569,7 @@ public class Gramatica{
                     }
                 }
                 else{
-                    Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+                    Utils.erroTiposIncompativeis(registro.getCont());
                 }
             }
             else if(registro.getNumToken() == DIVIDIDO){
@@ -589,7 +589,7 @@ public class Gramatica{
 					}
 				}
 				else{
-					Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+					Utils.erroTiposIncompativeis(registro.getCont());
 				}
 			}
 			else if(registro.getNumToken() == PORCENT){
@@ -609,7 +609,7 @@ public class Gramatica{
 					}
 				}
 				else{
-					Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+					Utils.erroTiposIncompativeis(registro.getCont());
 				}
 			}
 			else if(registro.getNumToken() == AND){
@@ -629,7 +629,7 @@ public class Gramatica{
 					}
 				}
 				else{
-					Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+					Utils.erroTiposIncompativeis(registro.getCont());
 				}
 			}
         }
@@ -659,7 +659,7 @@ public class Gramatica{
 				}
             }
             else{
-                Utils.erroTiposIncompativeis(registro.getCont(), tipo1, tipo2);
+                Utils.erroTiposIncompativeis(registro.getCont());
             }
         }
 

@@ -15,9 +15,7 @@ public class Automato{
     String fonte;
     
     public Automato(String fonte) throws IOException{
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        
-        fonte = fonte;
+        this.fonte = fonte;
         
         leitor = new BufferedReader(new FileReader(fonte));
         tabela = new TabelaSimbolos();

@@ -45,8 +45,8 @@ public class Gramatica{
     RegistroLexico registro;
     Automato anLex;
 
-    public Gramatica() throws IOException{
-        anLex = new Automato();
+    public Gramatica(String fonte) throws IOException{
+        anLex = new Automato(fonte);
         registro = anLex.automato(true, ' ');
 
         if(registro.getLexema() != ""){

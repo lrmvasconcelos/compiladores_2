@@ -14,13 +14,12 @@ public class Automato{
     static int cont = 1;
     String fonte;
     
-    public Automato() throws IOException{
+    public Automato(String fonte) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
-        System.out.println("Digite o nome: ");
-        fonte = br.readLine();
+        fonte = fonte;
         
-        leitor = new BufferedReader(new FileReader(fonte += ".l"));
+        leitor = new BufferedReader(new FileReader(fonte));
         tabela = new TabelaSimbolos();
     }
 

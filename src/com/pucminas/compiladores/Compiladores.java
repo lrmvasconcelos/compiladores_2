@@ -7,7 +7,7 @@ public class Compiladores{
         System.out.println("Compiladores");
 
         try{
-            Gramatica gramatica = new Gramatica();
+            new Gramatica(args[0]);
         }
         catch(IOException e){
             e.printStackTrace();
